@@ -1,0 +1,5 @@
+<!-- Save this as /public/svg/curly_arrow_down.svg -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <path d="M100 0 C100 50, 50 100, 100 150 C150 200, 150 100, 100 200" stroke="#7B5E42" stroke-width="4" fill="none" stroke-linecap="round" />
+  <polygon points="95,195 100,200 105,195" fill="#7B5E42" />
+</svg>
