@@ -71,6 +71,40 @@ export default function ITPage() {
         </motion.div>
       </section>
 
+      {/* Tech Stack Section */}
+      <section className="py-20 bg-white text-center">
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="text-3xl font-bold mb-10">Technologies I Use</h2>
+          <div className="flex flex-wrap justify-center items-center gap-8 max-w-4xl mx-auto">
+            {[
+              { name: "React", src: "/tech/react.svg" },
+              { name: "Next.js", src: "/tech/nextdotjs.svg" },
+              { name: "Tailwind CSS", src: "/tech/tailwindcss.svg" },
+              { name: "Django", src: "/tech/django.svg" },
+              { name: "JavaScript", src: "/tech/javascript.svg" },
+              { name: "HTML5", src: "/tech/html5.svg" },
+              { name: "Git", src: "/tech/git.svg" },
+            ].map((tech, index) => (
+              <motion.div
+                key={tech.name}
+                className="w-16 h-16"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <img src={tech.src} alt={tech.name} className="w-full h-full object-contain" title={tech.name} />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
       {/* Optional Pricing Section */}
       <section className="py-20">
         <h2 className="text-3xl font-bold text-center mb-10">Flexible Pricing</h2>

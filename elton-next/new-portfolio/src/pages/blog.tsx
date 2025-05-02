@@ -1,64 +1,57 @@
-import fs from 'fs';
-import path from 'path';
-import matter from 'gray-matter';
-import Link from 'next/link';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Link from "next/link"; // Import Link for navigation
 
-interface BlogMeta {
-  slug: string;
+interface BlogPost {
+  id: number;
   title: string;
-  date: string;
   excerpt: string;
-  coverImage?: string;
+  created_at: string;
+  slug: string; // Add slug field
+  image?: string;
+  coverImage?: string; // optional override for UI
 }
 
-export async function getStaticProps() {
-  const postsDirectory = path.join(process.cwd(), 'content', 'blog'); // Updated path to content/blog
-  const files = fs.readdirSync(postsDirectory);
+export default function BlogList() {
+  const [posts, setPosts] = useState<BlogPost[]>([]);
 
-  const posts = files.map((filename) => {
-    const slug = filename.replace('.md', ''); // Remove the .md extension
-    const fileContent = fs.readFileSync(path.join(postsDirectory, filename), 'utf-8');
-    const { data } = matter(fileContent);
+  useEffect(() => {
+    axios
+      .get("https://obscure-tribble-7vp74w7gq59q3rpxp-8000.app.github.dev/admin/blog/post/")
+      .then((response) => {
+        // Map `image` to `coverImage` for consistency
+        console.log("API response:", response.data);
+        const formatted = response.data.map((post: BlogPost) => ({
+          ...post,
+          coverImage: post.image || null,
+        }));
+        setPosts(formatted);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch blog posts:", error);
+      });
+  }, []);
 
-    return {
-      slug,
-      title: data.title,
-      date: data.date,
-      excerpt: data.excerpt,
-      coverImage: data.coverImage || null,
-    };
-  });
-
-  // Optional: sort by newest
-  posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  return { props: { posts } };
-}
-
-const BlogPage = ({ posts }: { posts: BlogMeta[] }) => {
   return (
-    <main className="max-w-6xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold mb-10">Blog</h1>
-      <div className="grid gap-8 grid-cols-1 md:grid-cols-2">
-        {posts.map((post) => (
-          <Link key={post.slug} href={`/blog/${post.slug}`}>
-            <div className="border rounded-2xl p-6 shadow hover:shadow-lg transition duration-300 bg-white">
-              {post.coverImage && (
-                <img
-                  src={post.coverImage}
-                  alt={post.title}
-                  className="mb-4 rounded-xl w-full h-48 object-cover"
-                />
-              )}
-              <h2 className="text-2xl font-semibold mb-2">{post.title}</h2>
-              <p className="text-sm text-gray-500 mb-2">{post.date}</p>
-              <p className="text-gray-700">{post.excerpt}</p>
-            </div>
-          </Link>
-        ))}
-      </div>
-    </main>
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-4">
+      {posts.map((post) => (
+        <Link key={post.id} href={`/posts/${post.slug}`}>  {/* Wrap the card with Link */}
+          <div className="bg-white rounded-2xl shadow p-4 cursor-pointer hover:shadow-lg transition-all">
+            {post.coverImage && (
+              <img
+                src={post.coverImage}
+                alt={post.title}
+                className="rounded-xl mb-3 w-full h-48 object-cover"
+              />
+            )}
+            <h2 className="text-xl font-bold">{post.title}</h2>
+            <p className="text-gray-600">{post.excerpt}</p>
+            <p className="text-sm text-gray-400 mt-2">
+              {new Date(post.created_at).toLocaleDateString()}
+            </p>
+          </div>
+        </Link>
+      ))}
+    </div>
   );
-};
-
-export default BlogPage;
+}

@@ -49,8 +49,15 @@ const CharwePage = () => {
           transition={{ duration: 1 }}
           className="flex flex-col md:flex-row md:items-center md:space-x-10"
         >
-          <img src="/great_zimbabwe.jpg" alt="Great Zimbabwe" className="w-full md:w-1/2 rounded-lg shadow-lg object-cover" />
-          <div className="mt-6 md:mt-0">
+          <div className="md:w-1/2">
+            <img src="/greatzim.PNG" alt="Great Zimbabwe" className="w-full rounded-lg shadow-lg object-cover" />
+            <p className="text-sm text-gray-500 mt-2 italic">
+              Figure 2 - The Conical Tower inside the Great Enclosure, Great Zimbabwe.<br />
+              Photograph courtesy of Ashton Sinamai, Midlands State University, Zimbabwe.<br />
+              Source: <a href="https://www.researchgate.net/figure/The-Conical-Tower-inside-the-Great-Enclosure-Great-Zimbabwe-Source-Photograph-courtesy_fig1_248962831" target="_blank" rel="noopener noreferrer" className="underline text-blue-600">ResearchGate</a>
+            </p>
+          </div>
+          <div className="mt-6 md:mt-0 md:w-1/2">
             <h2 className="text-3xl font-semibold mb-4">Inspired by Great Zimbabwe</h2>
             <p className="text-lg leading-relaxed">
               The grandeur of Great Zimbabwe — stone ruins, sacred landscapes — is the spiritual architecture behind this tale.
@@ -64,7 +71,7 @@ const CharwePage = () => {
           transition={{ duration: 1 }}
           className="flex flex-col md:flex-row-reverse md:items-center md:space-x-10"
         >
-          <img src="/mbuya_nehanda.jpg" alt="Mbuya Nehanda" className="w-full md:w-1/2 rounded-lg shadow-lg object-cover" />
+          <img src="/nehanda.PNG" alt="Mbuya Nehanda" className="w-full md:w-1/2 rounded-lg shadow-lg object-cover" />
           <div className="mt-6 md:mt-0">
             <h2 className="text-3xl font-semibold mb-4">Charwe. Nehanda. Spirit Alive.</h2>
             <p className="text-lg leading-relaxed">
@@ -115,8 +122,17 @@ const CharwePage = () => {
             <strong>Publisher:</strong> <a href="https://carnelianheart.com" className="text-blue-600 underline">Carnelian Heart Publishing</a>
           </p>
         </div>
-      </motion.div>
 
+        {/* Contact Me Button */}
+        <div className="text-center pt-10">
+        <Link
+          href="/contact"
+          className="inline-block bg-gray-800 text-white px-6 py-3 rounded-lg shadow hover:bg-gray-700 transition"
+        >
+          Contact Me
+        </Link>
+        </div>
+      </motion.div>
     </div>
   );
 };
