@@ -29,7 +29,6 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6">
           <Link href="/it" className="hover:text-yellow-400 transition duration-300">IT Services</Link>
           <Link href="/writing" className="hover:text-yellow-400 transition duration-300">Literary Work</Link>
-          <Link href="/blog" className="hover:text-yellow-400 transition duration-300">Reviews & Reflections</Link>
           <Link href="/contact" className="hover:text-yellow-400 transition duration-300">Contact</Link>
           <a href="/resume.pdf" download className="hover:text-yellow-400 transition duration-300">Resume</a>
         </div>
@@ -47,7 +46,6 @@ const Navbar = () => {
         <ul className="md:hidden mt-4 space-y-4 px-6 text-white text-lg">
           <li><Link href="/it" onClick={() => setMenuOpen(false)}>IT Services</Link></li>
           <li><Link href="/writing" onClick={() => setMenuOpen(false)}>Literary Work</Link></li>
-          <li><Link href="/blog" onClick={() => setMenuOpen(false)}>Reviews & Reflections</Link></li>
           <li><Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
           <li><a href="/resume.pdf" download onClick={() => setMenuOpen(false)}>Resume</a></li>
         </ul>

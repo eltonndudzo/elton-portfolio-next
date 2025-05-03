@@ -21,7 +21,7 @@ export default function ITPage() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
         >
-          Blending engineering precision with soulful creativity — I help individuals, startups, and organizations build beautiful, functional digital experiences.
+          Blending engineering precision with soulful creativity, I help individuals, startups, and organizations build beautiful, functional digital experiences.
         </motion.p>
       </section>
 
@@ -66,7 +66,7 @@ export default function ITPage() {
             I understand the power of design, storytelling, and technology. Whether you're building from scratch or modernizing your online presence, I bring creativity, clarity, and technical strength to the table.
           </p>
           <p className="text-gray-700 text-lg">
-            I don’t just write code — I craft experiences that resonate.
+            I don’t just write code, I craft experiences that resonate.
           </p>
         </motion.div>
       </section>
@@ -105,7 +105,7 @@ export default function ITPage() {
         </motion.div>
       </section>
 
-      {/* Optional Pricing Section */}
+      {/* Pricing Section */}
       <section className="py-20">
         <h2 className="text-3xl font-bold text-center mb-10">Flexible Pricing</h2>
         <div className="flex flex-col md:flex-row gap-8 justify-center items-center max-w-4xl mx-auto">
@@ -114,25 +114,26 @@ export default function ITPage() {
             { title: "Pro", price: "$250+", features: ["5+ pages or app", "Backend + API", "Custom Features"] },
             { title: "Premium", price: "Custom", features: ["Complex systems", "E-Commerce", "Ongoing support"] },
           ].map((plan, index) => (
-            <motion.div
-              key={index}
-              className="bg-white rounded-xl shadow-lg p-8 text-center flex-1 hover:shadow-2xl transition duration-300"
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
-            >
-              <h3 className="text-xl font-semibold mb-4">{plan.title}</h3>
-              <p className="text-2xl font-bold mb-4">{plan.price}</p>
-              <ul className="text-gray-600 space-y-2">
-                {plan.features.map((f, i) => <li key={i}>✅ {f}</li>)}
-              </ul>
-            </motion.div>
+            <Link key={index} href={`/contact?plan=${plan.title.toLowerCase()}`} passHref>
+              <motion.div
+                className="cursor-pointer bg-white rounded-xl shadow-lg p-8 text-center flex-1 hover:shadow-2xl transition duration-300"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2, duration: 0.6 }}
+              >
+                <h3 className="text-xl font-semibold mb-4">{plan.title}</h3>
+                <p className="text-2xl font-bold mb-4">{plan.price}</p>
+                <ul className="text-gray-600 space-y-2">
+                  {plan.features.map((f, i) => <li key={i}>✅ {f}</li>)}
+                </ul>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </section>
 
-      {/* Collaboration CTA */}
+      {/* CTA Section */}
       <section className="py-20 bg-[#f8f5f2] text-center">
         <motion.div
           initial={{ opacity: 0 }}

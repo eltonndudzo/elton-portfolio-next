@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { useRouter } from "next/router";
 import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
@@ -23,7 +23,6 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6">
           <Link href="/it" className="hover:text-yellow-400">IT Services</Link>
           <Link href="/writing" className="hover:text-yellow-400">Literary Work</Link>
-          <Link href="/blog" className="hover:text-yellow-400">Reviews & Reflections</Link>
           <Link href="/contact" className="hover:text-yellow-400">Contact</Link>
           <a href="/resume.pdf" download className="hover:text-yellow-400">Resume</a>
         </div>
@@ -35,7 +34,6 @@ const Navbar = () => {
         <ul className="md:hidden mt-4 space-y-4 px-6 text-white text-lg">
           <li><Link href="/it" onClick={() => setMenuOpen(false)}>IT Services</Link></li>
           <li><Link href="/writing" onClick={() => setMenuOpen(false)}>Literary Work</Link></li>
-          <li><Link href="/blog" onClick={() => setMenuOpen(false)}>Reviews & Reflections</Link></li>
           <li><Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
           <li><a href="/resume.pdf" download onClick={() => setMenuOpen(false)}>Resume</a></li>
         </ul>
@@ -52,92 +50,115 @@ const WelcomeSection = () => (
     className="relative h-screen flex flex-col md:flex-row items-center justify-center bg-gradient-to-br from-[#f9f6f1] to-[#e7d7c9] text-[#4b3832] px-6 overflow-hidden"
   >
     <div className="absolute w-80 h-80 md:w-[28rem] md:h-[28rem] bg-gradient-to-br from-[#f8e7d1] to-[#e0c4a8] rounded-full blur-3xl opacity-30 -z-10 top-1/3 left-1/4 transform -translate-x-1/2 -translate-y-1/2"></div>
-    <div className="flex flex-col items-center md:items-start md:flex-row">
+    <div className="flex flex-col md:flex-row items-center justify-center md:justify-start">
       <motion.img
         src="/profile7.png"
         alt="Elton's profile"
         initial={{ scale: 0.8, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
-        className="w-48 h-48 md:w-80 md:h-80 object-cover rounded-2xl shadow-xl"
-        style={{ objectPosition: "top" }}
+        className="w-48 h-48 md:w-80 md:h-80 object-cover rounded-2xl shadow-xl md:mr-10"
       />
-      <div className="absolute inset-0 z-[0] pointer-events-none">
-        <div className="absolute bottom-0 left-0 w-full h-20 transform -skew-y-3 bg-[#c9b5a0] opacity-60"></div>
-        <div className="absolute bottom-0 left-0 w-1/2 h-20 transform skew-y-12 bg-[#c9b5a0] opacity-40"></div>
-        <div className="absolute bottom-0 left-0 w-full h-20 transform skew-y--20 bg-[#c9b5a0] opacity-40"></div>
-        <div className="absolute top-0 right-0 w-3/4 h-20 transform skew-y-20 bg-[#c9b5a0] opacity-30"></div>
-      </div>
       <motion.div
         initial={{ x: 50, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 1.5, delay: 0.5 }}
-        className="mt-6 md:mt-0 md:ml-10 text-center md:text-left"
+        className="mt-6 md:mt-0 text-center md:text-left"
       >
-        <h1 className="text-3xl md:text-5xl font-bold">Hey there, I'm Elton.</h1>
-        <p className="mt-4 max-w-xl text-lg text-[#5c4438]">I code like I write: with precision, passion, and a bit of poetry.</p>
-        <blockquote className="mt-6 italic text-[#7a5e49] max-w-md">Explore my craft as both a software engineer and a fictional writer.</blockquote>
+        <h1 className="text-3xl md:text-5xl font-bold">Hie, I'm Elton.</h1>
+        <p className="mt-4 max-w-xl text-lg text-[#5c4438]">
+          I write code like poetry and poetry like code. How's the sound of that?
+        </p>
+        <blockquote className="mt-6 italic text-[#7a5e49] max-w-md">
+          I do both... with heart, with edge. Let me just show you how.
+        </blockquote>
       </motion.div>
     </div>
-    <motion.div animate={{ y: [0, -8, 0] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute bottom-10">
-      <div className="text-[#4b3832] text-3xl">⬇</div>
-    </motion.div>
   </motion.section>
 );
 
-const SplitShowcase = ({ activeSection, setActiveSection }: { activeSection: string | null; setActiveSection: (value: string | null) => void }) => (
-  <div className="relative flex flex-col md:flex-row h-auto md:h-screen bg-[#f9f6f0]">
-    {/* IT Section */}
-    <motion.div
-      className={`w-full md:w-1/2 p-8 relative overflow-hidden transition-all duration-500 ${
-        activeSection === "it" ? "md:w-2/3" : ""
-      } border-b-4 md:border-b-0 md:border-r-4 border-[#e5e2db]`}
-      onMouseEnter={() => setActiveSection("it")}
-      onMouseLeave={() => setActiveSection(null)}
-    >
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{
-        backgroundImage: `repeating-linear-gradient(135deg, rgba(128,90,60,0.06) 1px, transparent 2px, transparent 40px)`,
-        backgroundSize: "80px 80px",
-      }} />
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{
-        backgroundImage: "url('/svg/tech-pattern.svg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        opacity: 0.1,
-      }} />
-      <div className="relative z-10 backdrop-blur-sm bg-white/30 p-6 rounded-xl shadow-xl">
-        <h2 className="text-3xl font-bold text-[#3d2c1e]">Software & IT Solutions</h2>
-        <p className="mt-4 text-[#5e4b39]">Web development, automation, and custom-built apps to solve real problems.</p>
-        <Link href="/it" className="mt-6 inline-block bg-[#6b4f3b] hover:bg-[#8c6c54] text-white py-2 px-6 rounded-full">Discover More</Link>
-      </div>
-    </motion.div>
+const SplitShowcase = () => {
+  const [activeSection, setActiveSection] = useState<"it" | "writing" | null>(null);
+  const router = useRouter();
 
-    {/* Writing Section */}
-    <motion.div
-      className={`w-full md:w-1/2 p-8 relative overflow-hidden transition-all duration-500 ${
-        activeSection === "writing" ? "md:w-2/3" : ""
-      } border-t-4 md:border-t-0 md:border-l-4 border-[#e5e2db]`}
-      onMouseEnter={() => setActiveSection("writing")}
-      onMouseLeave={() => setActiveSection(null)}
-    >
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{
-        backgroundImage: `repeating-linear-gradient(225deg, rgba(128,90,60,0.06) 1px, transparent 2px, transparent 40px)`,
-        backgroundSize: "80px 80px",
-      }} />
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{
-        backgroundImage: "url('/svg/lit-pattern.svg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        opacity: 0.1,
-      }} />
-      <div className="relative z-10 backdrop-blur-sm bg-white/30 p-6 rounded-xl shadow-xl">
-        <h2 className="text-3xl font-bold text-[#3d2c1e]">Writing & Storytelling</h2>
-        <p className="mt-4 text-[#5e4b39]">Books, blogs, reviews, and soul-stirring narratives from Africa and beyond.</p>
-        <Link href="/writing" className="mt-6 inline-block bg-[#6b4f3b] hover:bg-[#8c6c54] text-white py-2 px-6 rounded-full">Read My Work</Link>
+  const baseStyle =
+    "transition-all duration-700 ease-in-out flex items-center justify-center text-white h-[80vh] md:h-[90vh] px-4 text-center cursor-pointer overflow-hidden";
+
+  const backgroundLines = (direction: "left" | "right") =>
+    `absolute inset-0 pointer-events-none z-0 ${
+      direction === "left" ? "bg-diagonal-left" : "bg-diagonal-right"
+    }`;
+
+  const handleSectionClick = (section: "it" | "writing") => {
+    if (section === "it") {
+      router.push("/it");
+    } else {
+      router.push("/writing");
+    }
+  };
+
+  return (
+    <div className="flex flex-col md:flex-row h-screen relative bg-[#e7d7c9]">
+      <div
+        onMouseEnter={() => setActiveSection("it")}
+        onMouseLeave={() => setActiveSection(null)}
+        onClick={() => handleSectionClick("it")}
+        className={`relative w-full md:w-1/2 ${baseStyle} ${
+          activeSection === "it"
+            ? "md:w-[60%] bg-zinc-800 z-10"
+            : activeSection === "writing"
+            ? "md:w-[40%] bg-transparent"
+            : "bg-zinc-800"
+        }`}
+      >
+        <div className={backgroundLines("left")} />
+        <motion.div
+          initial={{ opacity: 1 }}
+          animate={{
+            opacity: activeSection === "writing" ? 0.5 : 1,
+            scale: activeSection === "it" ? 1.05 : 1,
+          }}
+          transition={{ duration: 0.5 }}
+          className="z-10"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold">IT Services</h2>
+          <p className="mt-2 text-sm md:text-lg">
+            Web dev and automation... let’s build.
+          </p>
+        </motion.div>
       </div>
-    </motion.div>
-  </div>
-);
+
+      <div
+        onMouseEnter={() => setActiveSection("writing")}
+        onMouseLeave={() => setActiveSection(null)}
+        onClick={() => handleSectionClick("writing")}
+        className={`relative w-full md:w-1/2 ${baseStyle} ${
+          activeSection === "writing"
+            ? "md:w-[60%] bg-[#331c15] z-10"
+            : activeSection === "it"
+            ? "md:w-[40%] bg-transparent"
+            : "bg-[#331c15]"
+        }`}
+      >
+        <div className={backgroundLines("right")} />
+        <motion.div
+          initial={{ opacity: 1 }}
+          animate={{
+            opacity: activeSection === "it" ? 0.5 : 1,
+            scale: activeSection === "writing" ? 1.05 : 1,
+          }}
+          transition={{ duration: 0.5 }}
+          className="z-10"
+        >
+          <h2 className="text-3xl md:text-5xl font-bold">Creative Writing</h2>
+          <p className="mt-2 text-sm md:text-lg">
+            Books, poetry, essays... art that remembers.
+          </p>
+        </motion.div>
+      </div>
+    </div>
+  );
+};
 
 const BlogAndYouTubePreview = () => (
   <section className="py-20 bg-[#f9f6f0] px-6">
@@ -167,13 +188,11 @@ const BlogAndYouTubePreview = () => (
 );
 
 const LandingPage = () => {
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-
   return (
     <div className="flex flex-col">
       <Navbar />
       <WelcomeSection />
-      <SplitShowcase activeSection={activeSection} setActiveSection={setActiveSection} />
+      <SplitShowcase />
       <BlogAndYouTubePreview />
     </div>
   );

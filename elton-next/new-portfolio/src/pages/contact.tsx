@@ -1,10 +1,24 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Head from "next/head";
+import { useSearchParams } from "next/navigation";
 
 const ContactPage = () => {
   const [submitted, setSubmitted] = useState(false);
+  const searchParams = useSearchParams();
+
+  const prefillName = searchParams.get("name") || "";
+  const prefillMessage = searchParams.get("message") || "";
+  const plan = searchParams.get("plan");
+
+  const [messageValue, setMessageValue] = useState(prefillMessage);
+
+  useEffect(() => {
+    if (plan && !prefillMessage) {
+      setMessageValue(`I'm interested in the ${plan} plan. Please tell me more about it.`);
+    }
+  }, [plan, prefillMessage]);
 
   return (
     <>
@@ -40,6 +54,7 @@ const ContactPage = () => {
                   type="text"
                   name="name"
                   required
+                  defaultValue={prefillName}
                   placeholder="Your full name"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#4b3832] bg-white"
                 />
@@ -61,6 +76,8 @@ const ContactPage = () => {
                 <textarea
                   name="message"
                   required
+                  value={messageValue}
+                  onChange={(e) => setMessageValue(e.target.value)}
                   placeholder="What's on your mind?"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md h-32 resize-none focus:outline-none focus:ring-2 focus:ring-[#4b3832] bg-white"
                 ></textarea>
