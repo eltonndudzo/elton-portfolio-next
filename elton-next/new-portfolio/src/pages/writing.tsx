@@ -17,10 +17,10 @@ const WritingPage = () => {
         >
           <div className="mb-4">
             <Image
-              src="/images/charwe-cover.jpg"
+              src="/the_cover.PNG"
               alt="Charwe Cover Art"
-              width={500}
-              height={300}
+              width={400}  
+              height={250} 
               className="rounded-xl object-cover w-full h-auto"
             />
           </div>
@@ -35,7 +35,7 @@ const WritingPage = () => {
 
         {/* Ipikai Poetry Journal */}
         <a
-          href="https://ipikaipoetryjournal.wordpress.com/"
+          href="https://ipikai.org/author/eltonndudzo/"
           target="_blank"
           rel="noopener noreferrer"
           className="group border rounded-2xl p-6 bg-white shadow hover:shadow-lg transition"

@@ -19,9 +19,14 @@ const CharwePage = () => {
             Charwe is a deeply human retelling of Nehanda Charwe Nyakasikana, a spirit medium and mother, at the turning point of Zimbabwe’s colonization. Blending fact and fiction, it breathes life into a woman caught between family and nation, the living and the ancestral, resistance and survival. Charwe reclaims the spirit of the First Chimurenga, offering a bold, modern narrative rooted in African spirituality, memory, and truth.
           </p>
           <div className="mt-6 p-4 bg-white rounded shadow">
-            <p className="italic text-gray-700">
+            <a
+              href="https://www.greedysouth.co.zw/2025/02/book-review-charwe-by-elton-ndudzo.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="italic text-gray-700 hover:text-blue-600"
+            >
               "Ndudzo's writing adds a certain humanity to her persona that is often missing from the reverence people give her." — <strong>Tafadzwa Madzika, Greedy South</strong>
-            </p>
+            </a>
           </div>
           <div className="mt-6 p-4 bg-white rounded shadow">
             <p className="italic text-gray-700">
@@ -118,7 +123,7 @@ const CharwePage = () => {
         <div className="grid md:grid-cols-2 gap-10">
           <div className="bg-white rounded-lg shadow-lg p-6">
             <p className="text-gray-700 italic">
-              "Power requires blood. It was not only the kupinga-past ritual that increased the power of the Mutapa kingdom, but it was war and conquest. Blood must flow, that is why if someone tries aquiring power from a sangoma, a sacifice must be made. Power unites people as much as it breaks them."
+              "Power requires blood. It was not only the kupinga-past ritual that increased the power of the Mutapa kingdom, but it was war and conquest. Blood must flow, that is why if someone tries aquiring power from a sangoma, a sacrifice must be made. Power unites people as much as it breaks them."
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-6">
@@ -170,3 +175,4 @@ const CharwePage = () => {
 };
 
 export default CharwePage;
+
