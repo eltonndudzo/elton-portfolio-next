@@ -21,7 +21,7 @@ class Comment(models.Model):
     post = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="comments")
     parent = models.ForeignKey("self", null=True, blank=True, on_delete=models.CASCADE, related_name="replies")
     name = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(blank=True, null=True)
     content = models.TextField()
     created_at = models.DateTimeField(default=timezone.now)
 

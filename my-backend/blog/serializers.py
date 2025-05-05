@@ -10,11 +10,15 @@ class RecursiveField(serializers.Serializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     replies = RecursiveField(many=True, read_only=True)
-    author = serializers.StringRelatedField()  # Assuming you have an 'author' field in Comment
+    post_title = serializers.CharField(source='post.title', read_only=True)  # Optional: include post title for context
 
     class Meta:
         model = Comment
-        fields = ['id', 'post', 'parent', 'author', 'content', 'created_at', 'replies']
+        fields = [
+            'id', 'post', 'post_title', 'parent',
+            'name', 'email', 'content', 'created_at', 'replies'
+        ]
+        ordering = ['created_at']  # Optional: for consistent ordering if not in model
 
 class PostListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,6 +26,8 @@ class PostListSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'slug', 'excerpt', 'created_at', 'image']
 
 class PostSerializer(serializers.ModelSerializer):
+    slug = serializers.SlugField(read_only=True)
+
     class Meta:
         model = Post
         fields = ['id', 'title', 'content', 'created_at', 'image', 'slug']
@@ -31,4 +37,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'title', 'slug', 'excerpt', 'content', 'image', 'created_at', 'comments']
+        fields = [
+            'id', 'title', 'slug', 'excerpt',
+            'content', 'image', 'created_at', 'comments'
+        ]
