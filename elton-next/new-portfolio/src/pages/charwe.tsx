@@ -51,7 +51,7 @@ const CharwePage = () => {
             <p className="text-lg leading-relaxed">
               Illustrated by <a href="https://chitendefineart.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">Chitende Fine Arts</a>, the cover art is also a story on its own. It is Great Zimbabwe, but not quite.
               <br /><br />
-              The colours are not from stone but dream. A colourful sky stands behind rocks rendered in vivid purples, reds, and yellows, as if memory itself is tinted with longing.
+              The colours are not from stone but dream, I think. A colourful sky stands behind rocks rendered in vivid purples, browns, and yellows, as if memory itself is tinted with longing.
               <br /><br />
               Behold the place of myth, where power once pulsed through granite walls, and the whisper of the Mhondoro still hums in the wind. Like Charwe's story... real, imagined, reimagined.
               <br /><br />
@@ -123,7 +123,7 @@ const CharwePage = () => {
         <div className="grid md:grid-cols-2 gap-10">
           <div className="bg-white rounded-lg shadow-lg p-6">
             <p className="text-gray-700 italic">
-              "Power requires blood. It was not only the kupinga-past ritual that increased the power of the Mutapa kingdom, but it was war and conquest. Blood must flow, that is why if someone tries aquiring power from a sangoma, a sacrifice must be made. Power unites people as much as it breaks them."
+              "I always swim in this pool. In my mind, I imagine that I'm not alone. I imagine that I'm in this pool, swimming with the spirits of those who've been gone for so very long."
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-6">
@@ -144,13 +144,13 @@ const CharwePage = () => {
         <h2 className="text-4xl text-center font-bold mb-8">Where to Buy</h2>
         <div className="max-w-3xl mx-auto space-y-6 text-lg text-center">
           <p>
-            <strong>In Zimbabwe:</strong> Contact me directly, or order via <a href="https://wa.me/263772123456" className="text-blue-600 underline">Book Fantastics</a> (WhatsApp delivery).
+            <strong>In Zimbabwe:</strong> Contact me directly, or order via <a href="https://wa.me/263772123456" className="text-blue-600 underline">Book Fantastics</a> (WhatsApp Contact).
           </p>
           <p>
-            <strong>Worldwide:</strong> Available on <a href="https://www.amazon.com" className="text-blue-600 underline">Amazon</a>, <a href="https://www.barnesandnoble.com" className="text-blue-600 underline">Barnes & Noble</a>, and other global bookstores.
+            <strong>Worldwide:</strong> Available on <a href="https://www.amazon.com/Charwe-Elton-Ndudzo/dp/1914287835/ref=sr_1_1?crid=23FDSHB7PQFHF&dib=eyJ2IjoiMSJ9.LVYC4KzuB7qFnY9qM4ZF3FqWUk7DGjkicaOmYdxnRLaDl7nRrFSddsPm4syEbiougbL2I1jF9X2hNU5Gih941eL_8FIZ8W7G52DNVhST1gw.9V_6EezEXlTxbppmBOBdFZiE8_yJ2awReQMSYnTkmhY&dib_tag=se&keywords=charwe&qid=1746474973&sprefix=char%2Caps%2C455&sr=8-1" className="text-blue-600 underline">Amazon</a>, <a href="https://www.barnesandnoble.com/w/charwe-elton-ndudzo/1146359281?ean=9781914287831" className="text-blue-600 underline">Barnes & Noble</a>, and other global bookstores.
           </p>
           <p>
-            <strong>Publisher:</strong> <a href="https://carnelianheart.com" className="text-blue-600 underline">Carnelian Heart Publishing</a>
+            <strong>Publisher:</strong> <a href="https://carnelianheartpublishing.co.uk/" className="text-blue-600 underline">Carnelian Heart Publishing</a>
           </p>
         </div>
 
@@ -159,8 +159,7 @@ const CharwePage = () => {
           <Link
             href={{
               pathname: "/contact",
-              query: {
-                name: "Charwe Reader",
+              query: {             
                 message: "Hi Elton, I’d like to know more about Charwe or get a copy.",
               },
             }}
