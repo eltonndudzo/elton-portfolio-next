@@ -2,55 +2,106 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { HiMenu, HiX } from "react-icons/hi";
+import { calSans } from "@/fonts"; // adjust this path if needed
+
+const navItems = [
+  { href: "/about", label: "About Me" },
+  { href: "/it", label: "IT Services" },
+  { href: "/writing", label: "Literary Work" },
+  { href: "/contact", label: "Contact" },
+  { href: "/resume.pdf", label: "Resume", external: true },
+];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <nav
-      className={`w-full fixed top-0 z-50 px-6 transition-all duration-300 ${
-        scrolled ? "py-2 backdrop-blur-md" : "py-4 backdrop-blur-lg"
-      } bg-[rgba(201,181,160,0.2)] backdrop-saturate-150`}
+      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+        scrolled ? "bg-white/95 shadow-sm py-2" : "bg-white py-4"
+      }`}
     >
-        <div className="max-w-6xl mx-auto flex justify-between items-center text-[#3d2b1f] font-semibold">
-        <Link href="/" className="text-lg hover:text-yellow-400 transition duration-300">
-          Elton
+      <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-neutral-800">
+        <Link
+          href="/"
+          className={`text-lg tracking-tight font-semibold hover:text-black transition ${calSans.className}`}
+        >
+          ELTON NDUDZO
         </Link>
-        <div className="hidden md:flex space-x-6">
-          <Link href="/it" className="hover:text-yellow-400 transition duration-300">IT Services</Link>
-          <Link href="/writing" className="hover:text-yellow-400 transition duration-300">Literary Work</Link>
-          <Link href="/blog" className="hover:text-yellow-400 transition duration-300">Reviews & Reflections</Link>
-          <Link href="/contact" className="hover:text-yellow-400 transition duration-300">Contact</Link>
-          <a href="/resume.pdf" download className="hover:text-yellow-400 transition duration-300">Resume</a>
+
+        {/* Desktop Nav */}
+        <div className="hidden md:flex space-x-6 text-sm font-medium">
+          {navItems.map((item) =>
+            item.external ? (
+              <a
+                key={item.href}
+                href={item.href}
+                download
+                className="hover:text-black text-neutral-600 transition"
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`hover:text-black transition ${
+                  pathname === item.href ? "text-black" : "text-neutral-600"
+                }`}
+              >
+                {item.label}
+              </Link>
+            )
+          )}
         </div>
 
+        {/* Mobile Nav Toggle */}
         <button
-          className="md:hidden text-white text-3xl"
           onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden text-2xl text-neutral-800"
           aria-label="Toggle Menu"
         >
           {menuOpen ? <HiX /> : <HiMenu />}
         </button>
       </div>
 
+      {/* Mobile Nav Menu */}
       {menuOpen && (
-        <ul className="md:hidden mt-4 space-y-4 px-6 text-white text-lg">
-          <li><Link href="/it" onClick={() => setMenuOpen(false)}>IT Services</Link></li>
-          <li><Link href="/writing" onClick={() => setMenuOpen(false)}>Literary Work</Link></li>
-          <li><Link href="/blog" onClick={() => setMenuOpen(false)}>Reviews & Reflections</Link></li>
-          <li><Link href="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
-          <li><a href="/resume.pdf" download onClick={() => setMenuOpen(false)}>Resume</a></li>
-        </ul>
+        <div className="md:hidden px-6 pt-4 pb-6 space-y-4 bg-white text-neutral-700 text-base shadow-md">
+          {navItems.map((item) =>
+            item.external ? (
+              <a
+                key={item.href}
+                href={item.href}
+                download
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </a>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className={`block ${
+                  pathname === item.href ? "font-semibold text-black" : ""
+                }`}
+              >
+                {item.label}
+              </Link>
+            )
+          )}
+        </div>
       )}
     </nav>
   );

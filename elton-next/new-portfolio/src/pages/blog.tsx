@@ -1,9 +1,10 @@
-'use client';
-
+import { Inter } from 'next/font/google';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 interface BlogPost {
   id: number;
@@ -34,16 +35,14 @@ export default function BlogList() {
       .catch((error) => {
         console.error('Failed to fetch blog posts:', error);
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p className="pt-[80px] text-center">Loading...</p>;
+  if (loading) return <p className="pt-[80px] text-center text-[#eae1d8]">Loading...</p>;
 
   return (
-    <div className="max-w-6xl mx-auto pt-[80px] px-4 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold mb-12 text-center text-[#3d2c1e]">From the Blog</h1>
+    <div className={`min-h-screen bg-[#2e1a15] ${inter.variable} font-sans px-4 sm:px-6 lg:px-8 pt-[80px]`}>
+      <h1 className="text-4xl font-semibold mb-12 text-center text-[#f8f1e8] tracking-wide">From the Blog</h1>
       <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
         {posts.map((post, index) => (
           <Link key={post.id} href={`/blog/${post.slug}`}>
@@ -52,7 +51,7 @@ export default function BlogList() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white border border-[#e5e0d6] rounded-2xl shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 overflow-hidden cursor-pointer flex flex-col h-full"
+              className="bg-[#3a1e18] border border-[#5c3b30] rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer flex flex-col h-full"
             >
               {post.image && (
                 <img
@@ -63,10 +62,10 @@ export default function BlogList() {
               )}
               <div className="p-6 flex flex-col justify-between flex-grow">
                 <div>
-                  <h2 className="text-xl font-semibold mb-3 text-[#3d2c1e]">
+                  <h2 className="text-xl font-semibold mb-3 text-[#f8f1e8]">
                     {post.title}
                   </h2>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                  <p className="text-[#e0d6cf] text-sm leading-relaxed mb-6">
                     {post.content
                       ? post.content.slice(0, 140) + '...'
                       : 'No content available'}
@@ -74,7 +73,7 @@ export default function BlogList() {
                 </div>
                 <motion.p
                   whileHover={{ x: 4 }}
-                  className="text-[#4b3832] font-medium mt-auto transition-transform duration-200"
+                  className="text-[#f2d2c4] font-medium mt-auto transition-transform duration-200"
                 >
                   Read more →
                 </motion.p>
